@@ -1,4 +1,4 @@
-/* style3.css - Specific styles for page3.html */
+/* style.css - Primary styles for index.html */
 
 /* Preloader Styles */
 #preloader {
@@ -76,7 +76,7 @@
     margin-top: 10px;
 }
 
-#page3ProgressBar {
+#indexProgressBar {
     height: 100%;
     width: 0%;
     background-color: #FFD700; /* Gold */
@@ -86,7 +86,7 @@
     align-items: center;
 }
 
-#page3ProgressText {
+#indexProgressText {
     color: #0a0712;
     font-size: 0.7em;
     font-weight: bold;
