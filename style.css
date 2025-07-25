@@ -207,15 +207,10 @@
     text-align: center;
     background-color: transparent; /* Background handled by body/background-elements */
     box-shadow: none;
-    transition: opacity 1s ease-out; /* Smooth fade-in */
-    opacity: 0; /* Initially hidden */
-    visibility: hidden;
+    /* Removed opacity and visibility properties here to make it always visible */
+    /* Removed transition and .active rule that controlled fade-in */
 }
 
-.container.active {
-    opacity: 1;
-    visibility: visible;
-}
 
 .confession-section {
     max-width: 800px;
