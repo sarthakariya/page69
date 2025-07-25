@@ -1,0 +1,656 @@
+/* style3.css - Specific styles for page3.html */
+
+/* Preloader Styles */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0a0712; /* Dark background, matches general theme */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s ease-out, visibility 1s ease-out;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Allows clicks through once hidden */
+}
+
+.preloader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.preloader-single-heart {
+    width: 60px;
+    height: 60px;
+    background-color: #FF69B1; /* Pink heart */
+    transform: rotate(-45deg);
+    position: relative;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+    animation: heartPulse 1.5s infinite alternate ease-in-out;
+}
+
+.preloader-single-heart::before,
+.preloader-single-heart::after {
+    content: '';
+    width: 60px;
+    height: 60px;
+    background-color: #FF69B1;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.preloader-single-heart::before {
+    top: -30px;
+    left: 0;
+}
+
+.preloader-single-heart::after {
+    top: 0;
+    left: 30px;
+}
+
+.preloader-message {
+    color: #e0e0e0;
+    font-family: 'Lora', serif;
+    font-size: 1.2em;
+}
+
+.progress-bar-container {
+    width: 200px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+#page3ProgressBar {
+    height: 100%;
+    width: 0%;
+    background-color: #FFD700; /* Gold */
+    transition: width 0.5s ease-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#page3ProgressText {
+    color: #0a0712;
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
+/* Dynamic Transition Preloader */
+.transition-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0a0712;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* Higher than page load preloader */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in, visibility 0.5s ease-in;
+}
+
+.transition-preloader.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.preloader-dual-hearts {
+    display: flex;
+    position: relative;
+    width: 100px; /* Container for two hearts */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+.preloader-dual-hearts.active {
+    animation: dualHeartBeat 1.5s infinite alternate; /* Example animation */
+    opacity: 1;
+}
+
+.preloader-dual-hearts .heart {
+    width: 40px;
+    height: 40px;
+    background-color: #ff69b4;
+    transform: rotate(-45deg);
+    position: absolute;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+}
+
+.preloader-dual-hearts .heart:before,
+.preloader-dual-hearts .heart:after {
+    content: "";
+    width: 40px;
+    height: 40px;
+    background-color: #ff69b4;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.preloader-dual-hearts .heart:before {
+    top: -20px;
+    left: 0;
+}
+
+.preloader-dual-hearts .heart:after {
+    top: 0;
+    left: 20px;
+}
+
+/* Positioning for dual hearts */
+.preloader-dual-hearts .heart-left {
+    left: calc(50% - 50px);
+    transform: translateX(-100%) rotate(-45deg);
+    opacity: 0;
+    z-index: 2;
+}
+
+.preloader-dual-hearts .heart-right {
+    left: calc(50% + 10px);
+    transform: translateX(100%) rotate(-45deg);
+    opacity: 0;
+    z-index: 1;
+}
+
+/* Animations for dual hearts */
+@keyframes dualHeartSlideIn {
+    to {
+        transform: translateX(0) rotate(-45deg);
+        opacity: 1;
+    }
+}
+
+@keyframes dualHeartBeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+
+.loading-text {
+    color: var(--text-light);
+    font-family: 'Pacifico', cursive;
+    font-size: 1.5em;
+    margin-top: 15px;
+}
+
+/* Main Container and Content Styles */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    text-align: center;
+    background-color: transparent; /* Background handled by body/background-elements */
+    box-shadow: none;
+    transition: opacity 1s ease-out; /* Smooth fade-in */
+    opacity: 0; /* Initially hidden */
+    visibility: hidden;
+}
+
+.container.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.confession-section {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: rgba(30, 15, 50, 0.7); /* Slightly transparent background */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeInScale 1s ease-out forwards; /* Initial fade-in for the section */
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.confession-section h1,
+.confession-section p {
+    color: #e0e0e0;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    animation: slideInText 1s ease-out forwards;
+    opacity: 0; /* Start hidden for stagger */
+}
+
+.confession-section h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3em;
+    color: #FFD700; /* Gold color for headings */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.confession-main {
+    font-family: 'Lora', serif;
+    font-size: 1.3em;
+    font-style: italic;
+    color: #c0c0c0;
+}
+
+.question-text {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5em;
+    color: #FF69B1; /* Pink accent */
+    margin-top: 30px;
+    text-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
+}
+
+/* Choice Buttons */
+.choice-buttons {
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+    animation: fadeInButtons 1.5s ease-out forwards; /* Fade in buttons */
+    opacity: 0;
+}
+
+@keyframes fadeInButtons {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.choice-buttons button {
+    padding: 15px 40px;
+    font-size: 1.5em;
+    font-family: 'Pacifico', cursive;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative; /* For the glowing effect */
+    overflow: hidden;
+}
+
+#yesButton {
+    background-color: #4CAF50; /* Green for Yes */
+    color: white;
+}
+
+#yesButton:hover {
+    background-color: #45a049;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 128, 0, 0.5);
+}
+
+#noButton {
+    background-color: #F44336; /* Red for No */
+    color: white;
+}
+
+#noButton:hover {
+    background-color: #d32f2f;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 0, 0, 0.5);
+}
+
+/* Glow on hover effect */
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 50px;
+}
+
+.glow-on-hover:active {
+    color: #000;
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 50px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+/* Music button */
+.music-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.music-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.music-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.music-icon path {
+    fill: #FFD700; /* Gold color for icon */
+    transition: opacity 0.3s ease;
+}
+
+.music-button.playing .play-path {
+    opacity: 0;
+}
+
+.music-button.playing .pause-path {
+    opacity: 1;
+}
+
+.music-button.paused .play-path {
+    opacity: 1;
+}
+
+.music-button.paused .pause-path {
+    opacity: 0;
+}
+
+/* General body styling for background elements */
+body {
+    background: linear-gradient(to bottom, #0a0712, #1c0b2e);
+    min-height: 100vh;
+    overflow: hidden; /* Prevent scrollbars from background elements */
+    position: relative;
+}
+
+.background-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; /* Ensure background elements are behind content */
+}
+
+/* Basic styling for dynamic background elements
+   These will need more specific keyframes defined in style.css or here
+   if you want complex movements. For now, just ensure they are visible. */
+.star, .ethereal-glow, .particle, .aura-glow, .streak, .floating-orb,
+.nebula-cloud, .wind-gust, .flying-wing, .shooting-star, .cosmic-dust,
+.flickering-mote, .swirling-wisp, .gentle-flare, .moon, .distant-scenery {
+    position: absolute;
+    opacity: 0.5;
+    background-color: rgba(255, 255, 255, 0.8); /* Default light color */
+    border-radius: 50%; /* Default to circular */
+}
+
+/* Example: Star specific styling */
+.star {
+    background-color: white;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    animation: twinkle 4s infinite ease-in-out alternate;
+}
+
+/* Example: Ethereal glow specific styling */
+.ethereal-glow {
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.5), transparent);
+    animation: pulsateGlow 10s infinite ease-in-out alternate;
+}
+
+/* Example: Particle specific styling */
+.particle {
+    background-color: rgba(255, 255, 255, 0.7);
+    animation: floatParticle 15s infinite linear;
+    border-radius: 50%;
+}
+
+/* Example: Aura glow specific styling */
+.aura-glow {
+    background: radial-gradient(circle, rgba(255, 105, 180, 0.4), transparent);
+    animation: moveAura 20s infinite linear;
+}
+
+/* Example: Streak specific styling */
+.streak {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
+    animation: moveStreak 8s infinite linear;
+    border-radius: 0; /* Streaks are usually lines */
+    height: 2px;
+}
+
+/* Example: Floating Orb specific styling */
+.floating-orb {
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.6), rgba(138, 43, 226, 0.1));
+    animation: floatOrb 25s infinite ease-in-out;
+}
+
+/* Example: Nebula Cloud styling */
+.nebula-cloud {
+    background: radial-gradient(ellipse at center, rgba(138, 43, 226, 0.3), rgba(255, 105, 180, 0.2), transparent);
+    border-radius: 50%;
+    filter: blur(30px);
+    animation: moveNebula 30s infinite linear;
+}
+
+/* Example: Wind Gust styling */
+.wind-gust {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.4), transparent);
+    height: 1px;
+    animation: gustWind 10s infinite linear;
+}
+
+/* Example: Flying Wing styling */
+.flying-wing {
+    background-color: rgba(255, 255, 255, 0.6); /* Placeholder for wing shape */
+    animation: flyWing 18s infinite ease-in-out;
+    clip-path: polygon(0% 20%, 60% 0%, 100% 50%, 60% 100%, 0% 80%); /* Basic wing shape */
+}
+
+/* Example: Shooting Star styling */
+.shooting-star {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9), transparent);
+    height: 2px;
+    animation: shootStar 10s infinite ease-in-out;
+}
+
+/* Example: Cosmic Dust styling */
+.cosmic-dust {
+    background-color: rgba(255, 255, 255, 0.6);
+    animation: driftDust 25s infinite linear;
+    border-radius: 50%;
+}
+
+/* Example: Flickering Mote styling */
+.flickering-mote {
+    background-color: rgba(255, 255, 255, 0.8);
+    animation: flickerMote 3s infinite alternate;
+    border-radius: 50%;
+}
+
+/* Example: Swirling Wisp styling */
+.swirling-wisp {
+    background: radial-gradient(circle, rgba(255, 105, 180, 0.3), transparent);
+    filter: blur(10px);
+    animation: swirlWisp 15s infinite ease-in-out;
+    border-radius: 50%;
+}
+
+/* Example: Gentle Flare styling */
+.gentle-flare {
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.2), transparent);
+    filter: blur(40px);
+    animation: gentlePulseFlare var(--flare-duration) infinite alternate;
+    border-radius: 50%;
+}
+
+/* Moon and Scenery styles (placeholders) */
+.moon {
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(240, 240, 240, 0.5);
+    top: 10%;
+    left: 80%;
+    animation: moonRise 60s infinite linear;
+}
+
+.distant-scenery {
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    bottom: 0;
+    left: 0;
+    animation: sceneryDrift 120s infinite linear;
+}
+
+/* Basic Keyframes (these need to be more complex for realistic effects) */
+@keyframes heartPulse {
+    0% { transform: scale(1) rotate(-45deg); }
+    100% { transform: scale(1.1) rotate(-45deg); }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+@keyframes pulsateGlow {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+@keyframes floatParticle {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(var(--end-x), var(--end-y)); }
+}
+
+@keyframes moveAura {
+    0% { transform: translate(var(--start-x), var(--start-y)); }
+    100% { transform: translate(var(--end-x), var(--end-y)); }
+}
+
+@keyframes moveStreak {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100vw); }
+}
+
+@keyframes floatOrb {
+    0% { transform: translate(var(--start-x), var(--start-y)); }
+    100% { transform: translate(var(--end-x), var(--end-y)); }
+}
+
+@keyframes moveNebula {
+    0% { transform: translate(var(--start-x), var(--start-y)); }
+    100% { transform: translate(var(--end-x), var(--end-y)); }
+}
+
+@keyframes gustWind {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100vw); }
+}
+
+@keyframes flyWing {
+    0% { transform: translate(var(--start-x), var(--start-y)) rotate(var(--rotation)) scale(var(--scale)); }
+    100% { transform: translate(var(--end-x), var(--end-y)) rotate(var(--rotation)) scale(var(--scale)); }
+}
+
+@keyframes shootStar {
+    0% { transform: translateX(-100vw) rotate(45deg); opacity: 1; }
+    100% { transform: translateX(100vw) rotate(45deg); opacity: 0; }
+}
+
+@keyframes driftDust {
+    0% { transform: translate(var(--start-x), var(--start-y)); }
+    100% { transform: translate(var(--end-x), var(--end-y)); }
+}
+
+@keyframes flickerMote {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes swirlWisp {
+    0% { transform: translate(var(--wisp-start-x), var(--wisp-start-y)) rotate(0deg); }
+    100% { transform: translate(var(--wisp-end-x), var(--wisp-end-y)) rotate(360deg); }
+}
+
+@keyframes gentlePulseFlare {
+    0%, 100% { transform: scale(1); opacity: 0.2; }
+    50% { transform: scale(1.1); opacity: 0.3; }
+}
+
+@keyframes moonRise {
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-50px) translateX(20px); }
+    100% { transform: translateY(0) translateX(0); }
+}
+
+@keyframes sceneryDrift {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50px); }
+}
