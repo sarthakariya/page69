@@ -1,10 +1,10 @@
-// page3.js
+// index.js
 document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.getElementById('preloader');
     const mainContainer = document.querySelector('.container');
     const backgroundElementsContainer = document.querySelector('.background-elements');
-    const page3ProgressBar = document.getElementById('page3ProgressBar');
-    const page3ProgressText = document.getElementById('page3ProgressText');
+    const indexProgressBar = document.getElementById('indexProgressBar'); // Changed from page3ProgressBar
+    const indexProgressText = document.getElementById('indexProgressText'); // Changed from page3ProgressText
 
     const musicPlayButton = document.getElementById('music-play-button');
     const backgroundAudio = new Audio('perfect_instrumental.mp3'); // Ensure this path is correct
@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const interval = setInterval(() => {
         loadProgress += 10;
         if (loadProgress <= 100) {
-            page3ProgressBar.style.width = `${loadProgress}%`;
-            page3ProgressText.textContent = `${loadProgress}%`;
+            indexProgressBar.style.width = `${loadProgress}%`;
+            indexProgressText.textContent = `${loadProgress}%`;
         }
         if (loadProgress >= 100) {
             clearInterval(interval);
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- YES Button Logic (specific to page3.html) ---
+    // --- YES Button Logic (specific to index.html) ---
     const yesButton = document.getElementById('yesButton');
     if (yesButton) {
         yesButton.addEventListener('click', () => {
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- NO Button Logic (specific to page3.html) ---
+    // --- NO Button Logic (specific to index.html) ---
     const noButton = document.getElementById('noButton');
     if (noButton) {
         noButton.addEventListener('mouseover', () => {
