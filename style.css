@@ -207,8 +207,14 @@
     text-align: center;
     background-color: transparent; /* Background handled by body/background-elements */
     box-shadow: none;
-    /* Removed opacity and visibility properties here to make it always visible */
-    /* Removed transition and .active rule that controlled fade-in */
+    opacity: 0; /* Make container initially hidden */
+    visibility: hidden;
+    transition: opacity 1s ease-out, visibility 1s ease-out; /* Smooth fade in/out */
+}
+
+.container.active {
+    opacity: 1; /* Make container visible when 'active' class is added by JS */
+    visibility: visible;
 }
 
 
@@ -222,27 +228,16 @@
     backdrop-filter: blur(5px); /* Frosted glass effect */
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    animation: fadeInScale 1s ease-out forwards; /* Initial fade-in for the section */
+    /* Removed animation: fadeInScale here */
 }
 
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
 
 .confession-section h1,
 .confession-section p {
     color: #e0e0e0;
     margin-bottom: 20px;
     line-height: 1.6;
-    animation: slideInText 1s ease-out forwards;
-    opacity: 0; /* Start hidden for stagger */
+    /* Removed animation: slideInText and opacity: 0; here */
 }
 
 .confession-section h1 {
@@ -272,13 +267,7 @@
     display: flex;
     gap: 30px;
     margin-top: 40px;
-    animation: fadeInButtons 1.5s ease-out forwards; /* Fade in buttons */
-    opacity: 0;
-}
-
-@keyframes fadeInButtons {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    /* Removed animation: fadeInButtons and opacity: 0; here */
 }
 
 .choice-buttons button {
